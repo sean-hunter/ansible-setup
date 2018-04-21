@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: true
+  post_tasks:
+    - name: apt package upgrade
+      become: true
+      apt:
+        upgrade: yes
+        autoclean: yes
+        autoremove: yes
+    - name: clean package cache
+      become: true
+      command: apt-get clean
+      changed_when: false
+      args:
+        warn: false
