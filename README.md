@@ -31,6 +31,12 @@ At present they are only functional on linux as I don't have an ACORN mac.
 
 Enjoy!
 
+# Note
+
+This is a public repo so it can be used by devs who have not set up a corporate
+github account yet.  As such please don't put any confidential or internal-only
+stuff in here.
+
 If you have any problems, questions or comments, please contact me at
 [sean.hunter@acornmachine.io](mailto:sean.hunter@acornmachine.io) or on
 [slack](https://acorn-machine.slack.com)
