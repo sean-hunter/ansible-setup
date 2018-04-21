@@ -1,0 +1,63 @@
+---
+- hosts: localhost
+  become: true
+  pre_tasks:
+  - name: Virtualbox 2016 key
+    apt_key:
+      url: https://www.virtualbox.org/download/oracle_vbox_2016.asc 
+      state: present
+      id: 2980AECF 
+
+  - name: Virtualbox key
+    apt_key:
+      url: https://www.virtualbox.org/download/oracle_vbox.asc
+      state: present
+      id: 98AB5139
+
+  - apt_repository:
+      repo: deb https://download.virtualbox.org/virtualbox/debian xenial contrib           
+      state: present
+
+  - name: update apt package cache
+    become: true
+    apt:
+      update_cache: yes
+      cache_valid_time: 86400 #One day
+
+  tasks:
+  - name: Install basic dev packages
+    action: apt pkg={{item}} state=present
+    with_items:
+      - aptitude
+      - build-essential 
+      - default-jdk
+      - dkms 
+      - libssl-dev 
+      - tmux
+      - vim
+      - virtualbox
+      - virtualbox-guest-additions-iso
+      - vagrant
+      - snap
+
+  - name: Install circleci cli
+    command: snap install docker circleci
+    changed_when: false
+
+  - name: connect circleci cli to docker
+    command: snap connect circleci:docker docker
+    changed_when: false
+
+  post_tasks:
+    - name: apt package upgrade
+      become: true
+      apt:
+        upgrade: yes
+        autoclean: yes
+        autoremove: yes
+    - name: clean package cache
+      become: true
+      command: apt-get clean
+      changed_when: false
+      args:
+        warn: false

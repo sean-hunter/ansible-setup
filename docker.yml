@@ -1,0 +1,44 @@
+---
+- hosts: localhost
+  become: true
+  pre_tasks:
+  - name: download docker-compose
+    get_url:
+      url: curl -sSL https://github.com/docker/compose/releases/download/1.21.0/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose 
+      sha256sum: af639f5e9ca229442c8738135b5015450d56e2c1ae07c0aaa93b7da9fe09c2b0 
+      mode: "ugo=rx"
+
+  - name: Docker key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg 
+      state: present
+      id: 0EBFCD88    
+
+  - name: Docker repo
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+
+  tasks:
+  - name: Install docker packages
+    action: apt pkg={{item}} state=present
+    with_items:
+      - docker-ce 
+
+  - name: enable dockerd on reboot
+    systemd:
+        enabled: yes
+        state: started
+        name: docker
+
+  - name: ensure docker group is present
+    group:
+      name: docker
+      state: present
+
+  - name: add user {{ lookup('env', 'SUDO_USER') }} to docker group
+    user:
+      name: "{{ lookup('env', 'SUDO_USER') }}"
+      groups: docker
+      append: yes

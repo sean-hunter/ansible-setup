@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  become: true
+  pre_tasks:
+  - name: check whether nodesoure setup script exists
+    stat: 
+      path: /usr/local/sbin/nodesource-setup.sh
+      checksum_algorithm: sha256
+    register: nodesource_setup
+
+  - name: download nodesource setup
+    get_url:
+      url: https://deb.nodesource.com/setup_9.x 
+      dest: /usr/local/sbin/nodesource-setup.sh
+      sha256sum: 6fc4a211520d1c164e757312e97302670b4d600bfab85cfa4b5f2d877310b2d8  
+      mode: "u=rx,g=,o="
+    when: not nodesource_setup.stat.exists or not nodesource_setup.stat.checksum == "6fc4a211520d1c164e757312e97302670b4d600bfab85cfa4b5f2d877310b2d8"
+    register: nodesource_download
+
+  - name: Yarn key
+    apt_key:
+      url: https://dl.yarnpkg.com/debian/pubkey.gpg 
+      state: present
+      id: 86E50310
+
+  tasks:
+  - name: Install basic js dev packages
+    action: apt pkg={{item}} state=present
+    with_items:
+      - nodejs
+      - yarn 
+
+  - name: run nodesource setup
+    command: bash /usr/local/sbin/nodesource-setup.sh
+    when: nodesource_download.changed
