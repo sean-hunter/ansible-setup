@@ -22,7 +22,22 @@
       - python3.6-dev 
       - python3-pip 
 
-  - name: Install pipenv
-    action: pip name={{item}} version=3.6 state=present
+  #can't use the ansible pip module because the version of ansible is python 2 and therefore
+  #uses python2's pip, which means flake8 doesn't work at all and other packages install into the
+  #wrong python version
+  - name: Install python packages
+    command: pip3 install {{item}} --upgrade
+    become: true
     with_items:
+      - flake8
+      - jupyter
+      - numpy
+      - pandas
       - pipenv
+      - scipy
+    args:
+      warn: false
+    register: python_package_install
+    failed_when: >
+      python_package_install.rc != 0
+    changed_when: "python_package_install.stdout == 'Successfully installed'"
