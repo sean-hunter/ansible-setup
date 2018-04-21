@@ -36,7 +36,7 @@ that should allow you to immediately hit the ground running at ACORN machine.
 At present they are only functional on linux as I don't have an ACORN mac.
 
 You can also run any single playbook by hand should you want to by doing `sudo
-ansible <playbook-name>.yml`.  Setup runs them all.
+ansible-playbook <playbook-name>.yml`.  Setup runs them all.
 
 ## Note
 
