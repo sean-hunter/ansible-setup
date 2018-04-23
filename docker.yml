@@ -10,7 +10,7 @@
 
   - name: download docker-compose
     get_url:
-      url: curl -sSL https://github.com/docker/compose/releases/download/1.21.0/docker-compose-Linux-x86_64
+      url: https://github.com/docker/compose/releases/download/1.21.0/docker-compose-Linux-x86_64
       dest: /usr/local/bin/docker-compose 
       sha256sum: af639f5e9ca229442c8738135b5015450d56e2c1ae07c0aaa93b7da9fe09c2b0 
       mode: "ugo=rx"
