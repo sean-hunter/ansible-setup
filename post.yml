@@ -14,3 +14,6 @@
       changed_when: false
       args:
         warn: false
+    - name: install vagrant reload plugin
+      command: vagrant plugin install vagrant-reload
+      changed_when: falsee
