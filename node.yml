@@ -23,6 +23,12 @@
       state: present
       id: 86E50310
 
+  - name: Nodesource key
+    apt_key:
+      url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+      state: present
+      id: 68576280
+
   tasks:
   - name: Install basic js dev packages
     action: apt pkg={{item}} state=present
