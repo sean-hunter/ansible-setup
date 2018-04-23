@@ -14,7 +14,7 @@
 
   tasks:
   - name: Install python packages and a few things required for building pip packages
-    action: apt pkg={{item}} state=present
+    action: apt pkg={{item}} state=present update_cache=true
     with_items:
       - build-essential 
       - libssl-dev 

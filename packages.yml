@@ -19,11 +19,6 @@
       repo: deb https://download.virtualbox.org/virtualbox/debian xenial contrib           
       state: present
 
-  - name: Yarn repo
-    apt_repository:
-      repo: deb https://dl.yarnpkg.com/debian/ stable main
-      state: present
-
   - name: update apt package cache
     become: true
     apt:

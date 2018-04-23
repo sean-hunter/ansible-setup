@@ -29,7 +29,7 @@
 
   tasks:
   - name: Install docker packages
-    action: apt pkg={{item}} state=present
+    action: apt pkg={{item}} state=present update_cache=yes
     with_items:
       - docker-ce 
 
