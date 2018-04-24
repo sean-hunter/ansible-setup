@@ -25,6 +25,17 @@
       update_cache: yes
       cache_valid_time: 86400 #One day
 
+  - name: check whether postman exists
+    stat: 
+      path: /opt/Postman/Postman
+      checksum_algorithm: sha256
+    register: postman_setup
+
+  - name: download postman
+    become: true
+    get_url:
+      url: https://dl.pstmn.io/download/latest/linux64
+
   tasks:
   - name: Install basic dev packages
     action: apt pkg={{item}} state=present
@@ -38,6 +49,7 @@
       - tmux
       - vim
       - virtualbox
+      - virtualbox-dkms
       - virtualbox-guest-additions-iso
       - snap
 
