@@ -16,24 +16,20 @@ they probably aren't for you.
 ## Installing Ansible
 
 
-To install ansible via the package management system, do the following:
-
-```
-sudo apt-get install software-properties-common
-sudo apt-add-repository ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install -y ansible
-```
-
-This is probably the best way to do it on ubuntu the first time.
+To install ansible and run the playbooks for the first time, do `sudo
+./setup.sh` in the project dir.
 
 ## Running the playbooks
+
+...after that, you can rerun the playbooks by doing:
 
 `sudo ansible-playbook setup.yml`
 
 This should set up python, docker, yarn/nodejs and a few other bits in a way
 that should allow you to immediately hit the ground running at ACORN machine.
-At present they are only functional on linux as I don't have an ACORN mac.
+It will also upgrade any packages to pick up security fixes etc.  As such it's
+a good idea to rerun it from time to time.  At present they are only functional
+on linux as I don't have an ACORN mac.
 
 You can also run any single playbook by hand should you want to by doing `sudo
 ansible-playbook <playbook-name>.yml`.  Setup runs them all.
