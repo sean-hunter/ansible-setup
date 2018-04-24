@@ -2,6 +2,10 @@
 - hosts: localhost
   become: true
   post_tasks:
+    - name: Install vagrant reload plugin
+      become: true
+      command: vagrant plugin install reload
+      changed_when: false
     - name: apt package upgrade
       become: true
       apt:
