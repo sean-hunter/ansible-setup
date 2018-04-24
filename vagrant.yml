@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: Install vagrant packages
+    apt: 
+      deb: https://releases.hashicorp.com/vagrant/2.0.4/vagrant_2.0.4_x86_64.deb
+      state: present
