@@ -12,9 +12,9 @@
     get_url:
       url: https://deb.nodesource.com/setup_9.x 
       dest: /usr/local/sbin/nodesource-setup.sh
-      sha256sum: 91ceb1f1b9052de618b962803abb2b2c8e22e1b3fe11ebf064b7a1844858209e
+      sha256sum: 07b9031caf576e4aea1d8f63ef751f58f63b698a1a73c6e7884dd2502041280c
       mode: "u=rx,g=,o="
-    when: not nodesource_setup.stat.exists or not nodesource_setup.stat.checksum == "91ceb1f1b9052de618b962803abb2b2c8e22e1b3fe11ebf064b7a1844858209e"
+    when: not nodesource_setup.stat.exists or not nodesource_setup.stat.checksum == "07b9031caf576e4aea1d8f63ef751f58f63b698a1a73c6e7884dd2502041280c"
     register: nodesource_download
 
   - name: Yarn repo
