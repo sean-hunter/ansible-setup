@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+  - name: set vm max map count (required by elasticsearch
+    sysctl:
+      name: vm.max_map_count
+      value: 262144
+      state: present
+  - name: Enable items
+    action: sysctl name={{item}} value=1 state=present
+    with_items:
+      - net.ipv4.conf.default.rp_filter
+      - net.ipv4.conf.all.rp_filter
+  - name: Disable items
+    action: sysctl name={{item}} value=0 state=present
+    with_items:
+      - net.ipv4.conf.all.accept_redirects
+      - net.ipv4.conf.all.send_redirects
+      - net.ipv4.conf.all.accept_source_route
+      - net.ipv6.conf.all.accept_redirects
+      - net.ipv6.conf.all.accept_source_route
