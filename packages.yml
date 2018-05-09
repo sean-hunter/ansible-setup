@@ -16,7 +16,7 @@
 
   - name: Virtualbox repo
     apt_repository:
-      repo: deb https://download.virtualbox.org/virtualbox/debian xenial contrib           
+      repo: deb https://download.virtualbox.org/virtualbox/debian bionic contrib           
       state: present
 
   - name: update apt package cache

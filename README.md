@@ -1,4 +1,4 @@
-# Ansible Setup
+ Ansible Setup
 
 ## What's this repo for?
 
@@ -9,7 +9,7 @@ different READMEs to get productive.
 
 ## Prerequsites
 
-These playbooks are written for ubuntu 16.04 (xenial) which is I believe what
+These playbooks are written for ubuntu 18 LTS (bionic) which is I believe what
 everyone is using.  If you have a different version (or are not using Linux)
 they probably aren't for you.
 
