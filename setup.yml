@@ -1,6 +1,8 @@
 ---
 - import_playbook: sysctl.yml
 - import_playbook: packages.yml
+- import_playbook: postman.yml
+- import_playbook: graphiql.yml
 - import_playbook: docker.yml
 - import_playbook: node.yml
 - import_playbook: python.yml

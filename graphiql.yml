@@ -1,0 +1,15 @@
+- hosts: localhost
+  become: true
+  tasks:
+  - name: check whether graphiql exists
+    stat: 
+      path: /usr/local/bin/graphiql
+    register: graphiql
+
+  - name: Download graphiql
+    get_url:
+      url: https://github.com/skevy/graphiql-app/releases/download/v0.7.2/graphiql-app-0.7.2-x86_64.AppImage
+      dest: /usr/local/bin/graphiql
+      mode: "u=rx,g=rx,o=rx"
+    when: not graphiql.stat.exists
+    register: graphiql_download
