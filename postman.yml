@@ -2,9 +2,14 @@
 - hosts: localhost
   become: true
   tasks:
+  - name: create Postman dir
+    file:
+      path: /usr/local/Postman
+      state: directory
+
   - name: check whether postman exists
     stat: 
-      path: /usr/local/Postman
+      path: /usr/local/Postman/LICENSE
     register: postman
 
   - name: Download Postman
@@ -18,7 +23,7 @@
   - name: Unarchive postman
     unarchive:
       src=/tmp/Postman.tar.gz
-      dest=/usr/local/Postman
+      dest=/usr/local/
     when: postman_download
 
 
