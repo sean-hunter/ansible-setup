@@ -1,29 +1,27 @@
 
-- hosts: localhost
-  become: true
-  tasks:
-  - name: create Postman dir
-    file:
-      path: /usr/local/Postman
-      state: directory
+  - hosts: localhost
+    become: true
+    tasks:
+    - name: create Postman dir
+      file:
+        path: /usr/local/Postman
+        state: directory
 
-  - name: check whether postman exists
-    stat: 
-      path: /usr/local/Postman/LICENSE
-    register: postman
+    - name: check whether postman exists
+      stat: 
+        path: /usr/local/Postman/LICENSE
+      register: postman
 
-  - name: Download Postman
-    get_url:
-      url: https://dl.pstmn.io/download/latest/linux64
-      dest: /tmp/Postman.tar.gz
-      mode: "u=r,g=,o="
-    when: not postman.stat.exists
-    register: postman_download
+    - name: Download Postman
+      get_url:
+        url: https://dl.pstmn.io/download/latest/linux64
+        dest: /tmp/Postman.tar.gz
+        mode: "u=r,g=,o="
+      when: not postman.stat.exists
+      register: postman_download
 
-  - name: Unarchive postman
-    unarchive:
-      src=/tmp/Postman.tar.gz
-      dest=/usr/local/
-    when: postman_download
-
-
+    - name: Unarchive postman
+      unarchive:
+        src=/tmp/Postman.tar.gz
+        dest=/usr/local/
+      when: postman_download.changed
