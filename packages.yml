@@ -35,12 +35,12 @@
       - dkms 
       - git
       - libssl-dev 
+      - snap
       - tmux
       - vim
       - virtualbox
       - virtualbox-dkms
       - virtualbox-guest-additions-iso
-      - snap
 
   - name: Install circleci cli
     command: snap install docker circleci
