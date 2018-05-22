@@ -35,6 +35,7 @@
       - dkms 
       - git
       - libssl-dev 
+      - ruby
       - snap
       - tmux
       - vim
