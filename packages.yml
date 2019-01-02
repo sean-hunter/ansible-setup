@@ -4,9 +4,9 @@
   pre_tasks:
   - name: Virtualbox 2016 key
     apt_key:
-      url: https://www.virtualbox.org/download/oracle_vbox_2016.asc 
+      url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
       state: present
-      id: 2980AECF 
+      id: 2980AECF
 
   - name: Virtualbox key
     apt_key:
@@ -16,7 +16,7 @@
 
   - name: Virtualbox repo
     apt_repository:
-      repo: deb https://download.virtualbox.org/virtualbox/debian xenial contrib           
+      repo: deb https://download.virtualbox.org/virtualbox/debian xenial contrib
       state: present
 
   - name: update apt package cache
@@ -27,27 +27,23 @@
 
   tasks:
   - name: Install basic dev packages
-    action: apt pkg={{item}} state=present
-    with_items:
-      - aptitude
-      - build-essential 
-      - default-jdk
-      - dkms 
-      - git
-      - libssl-dev 
-      - ruby
-      - snap
-      - tmux
-      - vim
-      - virtualbox
-      - virtualbox-dkms
-      - virtualbox-guest-additions-iso
+    apt:
+      - state: present
+      - pkg:
+        - aptitude
+        - build-essential
+        - default-jdk
+        - dkms
+        - git
+        - libssl-dev
+        - ruby
+        - snap
+        - tmux
+        - vim
+        - virtualbox
+        - virtualbox-dkms
+        - virtualbox-guest-additions-iso
 
   - name: Install circleci cli
-    command: snap install docker circleci
+    command: snap install circleci
     changed_when: false
-
-  - name: connect circleci cli to docker
-    command: snap connect circleci:docker docker
-    changed_when: false
-
