@@ -12,9 +12,9 @@
     get_url:
       url: https://github.com/docker/compose/releases/download/1.21.0/docker-compose-Linux-x86_64
       dest: /usr/local/bin/docker-compose
-      sha256sum: 35704a0f6288c646fff16c8a164cd6581058cd1524a5aa0e851917beb3ec6cdd
+      sha256sum: af639f5e9ca229442c8738135b5015450d56e2c1ae07c0aaa93b7da9fe09c2b0
       mode: "ugo=rx"
-    when: not docker_compose_setup.stat.exists or not docker_compose_setup.stat.checksum == "35704a0f6288c646fff16c8a164cd6581058cd1524a5aa0e851917beb3ec6cdd"
+    when: not docker_compose_setup.stat.exists or not docker_compose_setup.stat.checksum == "af639f5e9ca229442c8738135b5015450d56e2c1ae07c0aaa93b7da9fe09c2b0"
 
   - name: Docker key
     apt_key:

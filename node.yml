@@ -3,18 +3,18 @@
   become: true
   pre_tasks:
   - name: check whether nodesoure setup script exists
-    stat: 
+    stat:
       path: /usr/local/sbin/nodesource-setup.sh
       checksum_algorithm: sha256
     register: nodesource_setup
 
   - name: download nodesource setup
     get_url:
-      url: https://deb.nodesource.com/setup_9.x 
+      url: https://deb.nodesource.com/setup_9.x
       dest: /usr/local/sbin/nodesource-setup.sh
-      sha256sum: 07b9031caf576e4aea1d8f63ef751f58f63b698a1a73c6e7884dd2502041280c
+      sha256sum: 35704a0f6288c646fff16c8a164cd6581058cd1524a5aa0e851917beb3ec6cdd
       mode: "u=rx,g=,o="
-    when: not nodesource_setup.stat.exists or not nodesource_setup.stat.checksum == "07b9031caf576e4aea1d8f63ef751f58f63b698a1a73c6e7884dd2502041280c"
+    when: not nodesource_setup.stat.exists or not nodesource_setup.stat.checksum == "35704a0f6288c646fff16c8a164cd6581058cd1524a5aa0e851917beb3ec6cdd"
     register: nodesource_download
 
   - name: Yarn repo
@@ -24,7 +24,7 @@
 
   - name: Yarn key
     apt_key:
-      url: https://dl.yarnpkg.com/debian/pubkey.gpg 
+      url: https://dl.yarnpkg.com/debian/pubkey.gpg
       state: present
       id: "86E50310"
 
@@ -39,7 +39,7 @@
     action: apt pkg={{item}} state=present update_cache=yes
     with_items:
       - nodejs
-      - yarn 
+      - yarn
 
   - name: run nodesource setup
     command: bash /usr/local/sbin/nodesource-setup.sh
