@@ -3,7 +3,7 @@
   become: true
   pre_tasks:
   - name: check if docker-compose exists
-    stat: 
+    stat:
       path: /usr/local/bin/docker-compose
       checksum_algorithm: sha256
     register: docker_compose_setup
@@ -11,16 +11,16 @@
   - name: download docker-compose
     get_url:
       url: https://github.com/docker/compose/releases/download/1.21.0/docker-compose-Linux-x86_64
-      dest: /usr/local/bin/docker-compose 
-      sha256sum: af639f5e9ca229442c8738135b5015450d56e2c1ae07c0aaa93b7da9fe09c2b0 
+      dest: /usr/local/bin/docker-compose
+      sha256sum: 35704a0f6288c646fff16c8a164cd6581058cd1524a5aa0e851917beb3ec6cdd
       mode: "ugo=rx"
-    when: not docker_compose_setup.stat.exists or not docker_compose_setup.stat.checksum == "af639f5e9ca229442c8738135b5015450d56e2c1ae07c0aaa93b7da9fe09c2b0"
+    when: not docker_compose_setup.stat.exists or not docker_compose_setup.stat.checksum == "35704a0f6288c646fff16c8a164cd6581058cd1524a5aa0e851917beb3ec6cdd"
 
   - name: Docker key
     apt_key:
-      url: https://download.docker.com/linux/ubuntu/gpg 
+      url: https://download.docker.com/linux/ubuntu/gpg
       state: present
-      id: 0EBFCD88    
+      id: 0EBFCD88
 
   - name: Docker repo
     apt_repository:
@@ -31,7 +31,7 @@
   - name: Install docker packages
     action: apt pkg={{item}} state=present update_cache=yes
     with_items:
-      - docker-ce 
+      - docker-ce
 
   - name: enable dockerd on reboot
     systemd:
