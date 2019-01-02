@@ -36,10 +36,12 @@
 
   tasks:
   - name: Install basic js dev packages
-    action: apt pkg={{item}} state=present update_cache=yes
-    with_items:
-      - nodejs
-      - yarn
+    apt:
+      name: "{{ packages }}"
+    vars:
+      packages:
+        - nodejs
+        - yarn
 
   - name: run nodesource setup
     command: bash /usr/local/sbin/nodesource-setup.sh

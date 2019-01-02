@@ -28,8 +28,9 @@
   tasks:
   - name: Install basic dev packages
     apt:
-      - state: present
-      - pkg:
+      name: "{{ packages }}"
+    vars:
+      packages:
         - aptitude
         - build-essential
         - default-jdk
